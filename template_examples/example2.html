@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+  <body>
+    <template id='profile_template'>
+    </template>
+
+    <script>
+      var host = document.getElementById('my_profile');
+      var root = host.createShadowRoot();
+      var template = document.getElementById('profile_template');
+      root.appendChild(template.content.cloneNode(true));
+    </script>
+  </body>
+</html>

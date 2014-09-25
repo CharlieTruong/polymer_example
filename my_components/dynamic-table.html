@@ -1,0 +1,79 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="drop-down-menu.html">
+<link rel="import" href="table-columns.html">
+
+<polymer-element name="dynamic-table" attributes="tableData menuOptions">
+  <template>
+    <style>
+      table {
+        border-collapse: collapse;
+        display: inline-table;
+      }
+
+      table th {
+        background-color: #33ADD6;
+        padding: 0;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+      }
+
+      table td {
+        width: 150px;
+      }
+
+      table td:not(:first-child) {
+        text-align: right;
+      }
+    </style>
+
+    <table>
+        <tr>
+          <th>Name</th>
+          <template repeat="{{column in columns}}">
+            <th><drop-down-menu menuOptions="{{menuOptions}}" selectionId="{{column.id}}"></drop-down-menu></th>
+          </template>
+        </tr>
+      <template repeat="{{record in tableData}}">
+        <tr>
+          <td>{{record.name}}</td>
+          <template repeat="{{column in columns}}">
+            <td>{{record[column.id]}}</td>
+          </template>
+        </tr>
+      </template>
+    </table>
+    <table-columns numColumns="{{numColumns}}"></table-columns>
+  </template>
+
+  <script>
+    Polymer('dynamic-table', {
+      tableData: [],
+
+      columns: [],
+
+      menuOptions: [],
+      
+      ready: function() {
+        for(var i = 0; i < this.numColumns; i++) {
+          this.columns.push({});
+        }
+      },
+
+      numColumnsChanged: function(oldVal, newVal) {
+        var change = newVal - oldVal;
+        
+        if (change < 0) {
+            for(var i = 0; i < Math.abs(change); i++) {
+              this.columns.pop();
+            }
+        } else if (change > 0) {
+            for(var i = 0; i < change; i++) {
+              this.columns.push({});
+            }
+        }
+      }
+    });
+  </script>
+</polymer-element>

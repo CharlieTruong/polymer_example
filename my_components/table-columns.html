@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="table-columns" attributes="numColumns">
+  <template>
+    <style>
+      div {
+        display: inline;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+
+    <div id="minus" on-click="{{removeColumn}}">-</div>
+    <div id="plus" on-click="{{addColumn}}">+</div>
+    
+  </template>
+
+  <script>
+    Polymer('table-columns', {
+      
+      numColumns: 1,
+
+      removeColumn: function() {
+        if (this.numColumns > 1) this.numColumns--;
+      },
+
+      addColumn: function() {
+        this.numColumns++;
+      }
+    });
+  </script>
+</polymer-element>

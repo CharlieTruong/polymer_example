@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+    <div id='my_profile'>
+      <span class='dislikes'>Hot Lava, Sand</span>
+      <img class='profile_pic' src="http://www.purplefalcon.com/images/blog/star-wars-beer/darth-vader.jpeg">
+      <span class='alias'>Anakin Skywalker</span>
+      <span class='name'>Darth Vader</span>
+      <span class='likes'>Subjugating Sand People</span>
+    </div>
+
+    <template id='profile_template'>
+      <style>
+        #container {
+          width: 300px;
+          margin: 0 auto;
+          text-align: center;
+          background-color: #66CCFF;
+          border: solid 1px;
+        }
+
+        ::content img {
+          width: 100px;
+        }
+        
+        ul {
+          list-style: none;
+          text-align: left;
+          padding: 0;
+          margin: 10px auto;
+          width: 210px;
+        }
+      </style>
+      <div id='container'>
+        <h3><content select='.name'></content></h3>
+        <div><content select='img'></content></div>
+        <ul>
+          <li><strong>Alias:  </strong><content select='.alias'></content></li>
+          <li><strong>Likes:  </strong><content select='.likes'></content></li>
+          <li><strong>Dislikes:  </strong><content select='.dislikes'></content></li>
+        </ul>
+      </div>
+    </template>
+
+    <script>
+      var host = document.getElementById('my_profile');
+      var root = host.createShadowRoot();
+      var template = document.getElementById('profile_template');
+      root.appendChild(template.content.cloneNode(true));
+    </script>
+  </body>
+</html>

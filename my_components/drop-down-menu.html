@@ -1,0 +1,67 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="drop-down-menu" attributes="menuOptions selectionId">
+  <template>
+    <style>
+      div {
+        width: 150px;
+      } 
+
+      #selection {
+        cursor: pointer;
+      }
+
+      :host {
+        position: relative;
+      }
+
+      #drop_down {
+        display: none;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: absolute
+;        cursor: pointer;
+        left: -40px;
+      }
+
+      #drop_down div {
+        background-color: #CCFFFF;
+        border: 1px solid black;
+      }
+
+      #drop_down div:hover {
+        background-color: #B8E6E6;
+      }
+    </style>
+
+    <div id="selection" on-mouseover="{{showMenu}}" on-mouseout="{{hideMenu}}">Choose Field</div>
+    <ul id="drop_down" on-mouseover="{{showMenu}}" on-mouseout="{{hideMenu}}">
+      <template repeat="{{option in menuOptions}}">
+        <li><div id="{{option.id}}" on-click="{{makeSelection}}" >{{option.name}}</div></li>
+      </template>
+    </ul>
+  </template>
+
+  <script>
+    Polymer('drop-down-menu', {
+      
+      menuOptions: [],
+
+      makeSelection: function(event, detail, sender) {
+        this.selectionId = sender.id;
+        this.$.selection.textContent = sender.textContent;
+        this.$.drop_down.style.display = "none";
+      },
+
+      showMenu: function(event, detail, sender) {
+        this.$.drop_down.style.display = "block";
+      },
+
+      hideMenu: function(event, detail, sender) {
+        this.$.drop_down.style.display = "none";
+      }
+
+    });
+  </script>
+</polymer-element>

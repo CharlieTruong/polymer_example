@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <style>
+      h3 {
+        font-size: 50px;
+      }
+
+      /*#inside_shadow::shadow h3 {
+        font-size: 50px;
+        color: red;
+      }*/
+    </style>
+    <div id='outside_shadow'><h3>Light DOM</h3></div>
+    <div id='inside_shadow'></div>
+
+    <script>
+      var host = document.querySelector('#inside_shadow');
+      var root = host.createShadowRoot();
+      root.innerHTML = '<style>h3 { color: blue;} </style>' +
+                       '<h3>Shadow DOM</h3>'
+      
+    </script>
+  </body>
+</html>
